@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-medical.jpg";
 import { Heart, MessageSquare, Calendar, Shield } from "lucide-react";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onShowChat: () => void;
+}
+
+const HeroSection = ({ onShowChat }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen bg-gradient-background overflow-hidden">
       {/* Background Elements */}
@@ -30,11 +34,21 @@ const HeroSection = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="medical" size="lg" className="text-lg">
+              <Button 
+                variant="medical" 
+                size="lg" 
+                className="text-lg"
+                onClick={onShowChat}
+              >
                 Start Health Chat
                 <MessageSquare className="w-5 h-5" />
               </Button>
-              <Button variant="outline" size="lg" className="text-lg">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg"
+                onClick={onShowChat}
+              >
                 Book Appointment
                 <Calendar className="w-5 h-5" />
               </Button>

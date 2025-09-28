@@ -65,7 +65,7 @@ const App = () => {
               showChat={showChat}
             />
             <main className="container mx-auto px-4 py-8">
-              {showChat ? <ChatInterface /> : <Index />}
+              {showChat ? <ChatInterface /> : <Index onShowChat={() => setShowChat(true)} />}
             </main>
           </div>
         )}
