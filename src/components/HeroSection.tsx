@@ -4,9 +4,10 @@ import { Heart, MessageSquare, Calendar, Shield } from "lucide-react";
 
 interface HeroSectionProps {
   onShowChat: () => void;
+  onShowAppointment: () => void;
 }
 
-const HeroSection = ({ onShowChat }: HeroSectionProps) => {
+const HeroSection = ({ onShowChat, onShowAppointment }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen bg-gradient-background overflow-hidden">
       {/* Background Elements */}
@@ -47,7 +48,7 @@ const HeroSection = ({ onShowChat }: HeroSectionProps) => {
                 variant="outline" 
                 size="lg" 
                 className="text-lg"
-                onClick={onShowChat}
+                onClick={onShowAppointment}
               >
                 Book Appointment
                 <Calendar className="w-5 h-5" />

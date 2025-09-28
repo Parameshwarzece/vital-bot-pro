@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { User, LogOut, MessageCircle, Home } from "lucide-react";
+import { User, LogOut, MessageCircle, Home, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface NavigationProps {
   user: any;
   onShowChat: () => void;
   onShowHome: () => void;
-  showChat: boolean;
+  onShowAppointment: () => void;
+  currentView: 'home' | 'chat' | 'appointment';
 }
 
-const Navigation = ({ user, onShowChat, onShowHome, showChat }: NavigationProps) => {
+const Navigation = ({ user, onShowChat, onShowHome, onShowAppointment, currentView }: NavigationProps) => {
   const [profile, setProfile] = useState<any>(null);
   const { toast } = useToast();
 
@@ -69,7 +70,7 @@ const Navigation = ({ user, onShowChat, onShowHome, showChat }: NavigationProps)
 
         <div className="flex items-center gap-4">
           <Button
-            variant={showChat ? "medical" : "outline"}
+            variant={currentView === "home" ? "medical" : "outline"}
             onClick={onShowHome}
             className="flex items-center gap-2"
           >
@@ -78,12 +79,21 @@ const Navigation = ({ user, onShowChat, onShowHome, showChat }: NavigationProps)
           </Button>
           
           <Button
-            variant={showChat ? "outline" : "medical"}
+            variant={currentView === "chat" ? "medical" : "outline"}
             onClick={onShowChat}
             className="flex items-center gap-2"
           >
             <MessageCircle className="h-4 w-4" />
             Chat
+          </Button>
+          
+          <Button
+            variant={currentView === "appointment" ? "medical" : "outline"}
+            onClick={onShowAppointment}
+            className="flex items-center gap-2"
+          >
+            <Calendar className="h-4 w-4" />
+            Appointments
           </Button>
 
           <div className="flex items-center gap-2 text-sm text-medical-600">

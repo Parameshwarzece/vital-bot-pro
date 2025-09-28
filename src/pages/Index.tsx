@@ -4,12 +4,13 @@ import TechStackSection from "@/components/TechStackSection";
 
 interface IndexProps {
   onShowChat: () => void;
+  onShowAppointment: () => void;
 }
 
-const Index = ({ onShowChat }: IndexProps) => {
+const Index = ({ onShowChat, onShowAppointment }: IndexProps) => {
   return (
     <div className="min-h-screen">
-      <HeroSection onShowChat={onShowChat} />
+      <HeroSection onShowChat={onShowChat} onShowAppointment={onShowAppointment} />
       <FeaturesSection />
       <TechStackSection />
     </div>

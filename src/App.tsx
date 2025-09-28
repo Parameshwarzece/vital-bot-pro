@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import AuthForm from "@/components/AuthForm";
 import Navigation from "@/components/Navigation";
 import ChatInterface from "@/components/ChatInterface";
+import AppointmentBooking from "@/components/AppointmentBooking";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
@@ -14,7 +15,7 @@ const queryClient = new QueryClient();
 const App = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [showChat, setShowChat] = useState(false);
+  const [currentView, setCurrentView] = useState<'home' | 'chat' | 'appointment'>('home');
 
   useEffect(() => {
     // Get initial session
@@ -60,12 +61,22 @@ const App = () => {
           <div className="min-h-screen bg-background">
             <Navigation 
               user={user} 
-              onShowChat={() => setShowChat(true)}
-              onShowHome={() => setShowChat(false)}
-              showChat={showChat}
+              onShowChat={() => setCurrentView('chat')}
+              onShowHome={() => setCurrentView('home')}
+              onShowAppointment={() => setCurrentView('appointment')}
+              currentView={currentView}
             />
             <main className="container mx-auto px-4 py-8">
-              {showChat ? <ChatInterface /> : <Index onShowChat={() => setShowChat(true)} />}
+              {currentView === 'chat' ? (
+                <ChatInterface />
+              ) : currentView === 'appointment' ? (
+                <AppointmentBooking />
+              ) : (
+                <Index 
+                  onShowChat={() => setCurrentView('chat')}
+                  onShowAppointment={() => setCurrentView('appointment')}
+                />
+              )}
             </main>
           </div>
         )}
