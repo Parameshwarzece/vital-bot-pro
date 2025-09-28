@@ -12,9 +12,16 @@ interface NavigationProps {
   currentView: 'home' | 'chat' | 'appointment';
 }
 
+// Navigation Component - Updated to fix caching issue
 const Navigation = ({ user, onShowChat, onShowHome, onShowAppointment, currentView }: NavigationProps) => {
   const [profile, setProfile] = useState<any>(null);
   const { toast } = useToast();
+
+  // Ensure all props are properly defined
+  if (!onShowChat || !onShowHome || !onShowAppointment) {
+    console.error('Navigation: Missing required props');
+    return null;
+  }
 
   useEffect(() => {
     if (user) {
